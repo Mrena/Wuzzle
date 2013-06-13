@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <title>Wuzzle</title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+        <link rel="stylesheet" href="css/mainstyle.css" />
+        <script src="js/webworks-1.0.4.5.js"></script>
+    </head>
+<body>
+    <div data-role="page" id="index" data-theme="a">
+        <div data-role="header" data-position="fixed" data-theme="a">
+         <ul data-role="listview" style="list-style:none;">
+          <li><img src="images/icons/wuzzle-150.png" alt="logo" />
+              <h3><span class="game_name"></span></h3>
+              <p>The ultimate word puzzle.</p>
+          </li>
+        </ul>
+        </div>
+    <div data-role="content">
+        <br />
+    <ul data-role="listview" data-inset="true">
+    <li><a href="#game" id="newGame">
+		<h3>New Game</h3>
+        <p>Start a new Game</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>
+    <li>
+        <a href="#instructions">
+        <h3>Instructions</h3>
+            <p>Learn how to play the game</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>
+    <li>
+        <a href="#settings">
+        <h3>Settings</h3>
+            <p>Tailor your game</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>
+    <li>
+        <a href="#leaderboard">
+        <h3>Leaderboard</h3>
+            <p>See your progress.</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>
+    <li>
+        <a href="#improvement">
+        <h3>Improvement Statistics</h3>
+            <p>Visualize your progress.</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>
+    <!--  <li>
+        <a href="#socialhub">
+        <h3>SocialHub</h3>
+            <p>Engage with other game players.</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>-->
+    <li>
+        <a href="#about">
+        <h3>About</h3>
+            <p>Find out more about the game and it's developer</p>
+        </a>
+    </li>
+    <li data-role="list-divider"></li>
+    <li>
+        <a href="#"  id="exit">
+        <h3>Exit</h3>
+            <p>Take some time off.</p>
+        </a>
+    </li>
+    </ul>
+    <div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+				<div style="padding:10px 20px;">
+				  <div id="passwordErr"></div>
+		          <label for="loginPassword" class="ui-hidden-accessible">Password:</label>
+		          <input type="password" name="loginPassword" id="loginPassword" placeholder="password" data-theme="a" />
+		    	  <a data-role="button"   id="signIn" data-theme="b">Unlock</a>
+		    	  <a data-role="button"  id="forgotPassword" data-theme="b">Forgot Password</a>
+				</div>
+		</div>
+		 <div data-role="popup" id="popupforgotpass" data-theme="a" class="ui-corner-all">
+		 <div data-role="header"><a data-role="button" data-icon="back" data-iconpos="notext" style="float:left" id="passwordRecoveryBack">Back</a></div>
+				<div style="padding:10px 20px;">
+				  <h3>Please enter the question and answer you entered in Settings.</h3>
+				  <div id="passwordNote"></div>
+            <label for="recovery_question">Password Recovery Question:</label>
+            <select id="recovery_question" data-navite-menu="false">
+            <option>Refresh List</option>
+            </select>
+            <label for="recovery_answer">Answer:</label>
+            <input type="text" name="recovery_answer" id="recovery_answer" placeholder="answer" value="" />
+		    	  <a data-role="button" data-inset="true" id="showPassword" data-theme="b">Show Password</a>
+		    	  <div id="btnUnlock">
+		    	  </div>
+				</div>
+			</div>
+			<div data-role="popup" id="exitpopup" data-position-to="window" data-theme="a" class="ui-corner-all">
+           <div data-role="header" data-theme="b">
+       <h3>Exit</h3>
+        </div>
+        <div style="padding:10px 20px;">
+        <p>Are you sure?</p>
+            <a href="index.html" id="exitNo" data-role="button" data-inline="true">No</a>
+            <a href="#" id="exitYes" data-role="button" data-inline="true">Yes</a>
+        </div>
+        </div>
+        
+        <div data-role="popup" id="popupSplash" class="splashpopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+                <img src="images/loading.png" id="loading" alt="Loading...">
+	</div>
+        <div class="ad_area"></div>
+    </div>
+    <div data-role="footer" data-theme="a" data-position="fixed">
+       <h1><span class="copyright">Mrena Systems © 2012 - 2013</span></h1>
+    </div>
+    </div><!-- end of #index page--> 
+    
+    
+     <!-- start of page #settings -->
+   <div data-role="page" id="settings" data-theme="a" data-title="settings">
+    <div data-role="header" data-theme="a">
+     <div class="header"></div>
+    </div>
+        <div align="left" style="text-align:left" data-theme="a" data-role="content">
+			<ul data-role="listview" data-inset="true">
+                            <li><h3>Settings</h3></li>
+                            <li id="levels">
+                                <label for="level">Difficulty:</label>
+                                <select id="level" name="level">
+                                </select>
+                            </li>
+                             <li>
+                                <label for="music">Background Music:</label>
+                                <select name="music" id="music" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                             </li>
+                             <li>
+                                <label for="music_volume">Music Volume</label>
+                                <input type="range" value="1" min="1" max="5" id="music_volume" name="music_volume" />
+                             </li>
+                             <li>
+                                <label for="sound">Game Sound:</label>
+               <!-- <div data-role="fieldcontain" align="left">
+                    <div data-role="controlgroup" data-type="horizontal" id="sound" align="left">
+                        <input type="radio" name="sound" id="on" value="on" checked="checked" />
+                        <label for="on">On</label>
+                        <input type="radio" name="sound" id="off" value="on" />
+                        <label for="off">Off</label>
+                    </div>
+                </div>-->
+                              <select name="sound" id="sound" data-role="slider">
+                                    <option value="on">On</option>
+                                    <option value="off">Off</option>
+                              </select>
+                            </li>
+                            <li>
+                                <label for="sound_volume">Sound Volume</label>
+                                <input type="range" value="1" min="1" max="5" id="sound_volume" name="sound_volume"  />
+                            </li>
+                            <li>
+                                <label for="force_feedback">Force Feedback:</label>
+                                <select name="force_feedback" id="force_feedback" data-role="slider">
+                                    <option value="off">Off</option>
+                                    <option value="on">On</option>
+                                </select>
+                            </li>
+                        </ul>
+            <div data-role="collapsible">
+            <h3>Advanced Settings</h3>
+            <p>
+            <ul data-role="listview" data-inset="true">
+            <li id="edit_username">
+            	<label for="socialHub_username">SocialHub Username:</label>
+            	<input type="text" name="socialHub_username" id="socialHub_username" placeholder="username" value="" />
+            </li>
+            <li>
+            <label for="password_protect">Password Protect Game:</label>
+            <select name="password_protect" id="password_protect" data-role="slider">
+                 <option value="off">Off</option>
+                 <option value="on">On</option>
+            </select><br /><br />
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" placeholder="password" />
+            </li>
+            <li>
+            <label for="password_recovery_q">Password Recovery Question:</label>
+            <select name="password_recovery_q" id="password_recovery_q">
+            </select>
+            </li>
+            <li>
+            <label for="answer">Answer:</label>
+            <input type="text" name="answer" id="answer" placeholder="answer" value="" />
+            </li>
+              </ul>
+              </div>
+            <div class="ad_area"></div>
+        </div>
+        <div data-role="footer" data-theme="a" data-position="fixed">
+            <div class="footer"></div>
+        </div> 
+    </div> <!-- end of page #settings -->
+    
+    <div data-role="page" id="game" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="a">
+     <div class="header"></div>
+    </div>
+    <div data-role="content">
+ 	<div>Score: <span id="score"></span></div>
+            <table align="center" id="road" border="1">
+ <tr id="head" style="display: none"><td id="col_1" class="head"></td><td id="col_2" class="head"></td><td id="col_3" class="head"> </td><td id="col_4" class="head"></td><td id="col_5" class="head"></td><td id="col_6" class="head"></td><td id="col_7" class="head"></td></tr>
+                         <tr id="row_0"><td  id="10"></td><td  id="20"></td><td  id="30"> </td><td  id="40"></td><td  id="50"></td><td  id="60"></td><td  id="70"></td></tr>
+                         <tr id="row_1"><td  id="11"></td><td  id="21"></td><td  id="31"> </td><td  id="41"></td><td  id="51"></td><td  id="61"></td><td  id="71"></td></tr>
+                         <tr id="row_2"><td  id="12"></td><td  id="22"></td><td  id="32"> </td><td  id="42"></td><td  id="52"></td><td  id="62"></td><td  id="72"></td></tr>
+                         <tr id="row_3"><td  id="13"></td><td  id="23"></td><td  id="33"> </td><td  id="43"></td><td  id="53"></td><td  id="63"></td><td  id="73"></td></tr>
+                         <tr id="row_4"><td  id="14"></td><td  id="24"></td><td  id="34"> </td><td  id="44"></td><td  id="54"></td><td  id="64"></td><td  id="74"></td></tr>
+                         <tr id="row_5"><td  id="15"></td><td  id="25"></td><td  id="35"> </td><td  id="45"></td><td  id="55"></td><td  id="65"></td><td  id="75"></td></tr>
+                         <tr id="row_6"><td  id="16"></td><td  id="26"></td><td  id="36"> </td><td  id="46"></td><td  id="56"></td><td  id="66"></td><td  id="76"></td></tr>
+	</table>
+
+<div>Time:<span id="timer"></span> </div>
+<div id="err" style="color:red"> </div>
+
+<div data-role="popup" class="highscorepopup" data-theme="a">
+          <div data-role="header" data-theme="b">
+       <h3>You win</h3>
+        </div>
+        <div data-role="content" data-theme="b">
+        <p>Congratulations! You have made it to the Leaderboard.</p>
+        <p>Your score is: <span class="newHighScore"></span></p>
+        <span class="newScoreErr"></span>
+            <label for="name" id="lblName">Please enter your name:</label>
+            <input type="text" name="name" class="name" id="name" placeholder="Name" style="height:100%;width:100%;" />
+            <a href="#" class="enterScore" data-role="button">Ok</a>
+            </div>
+            <div data-role="footer" data-theme="a"></div>
+        </div> <!-- end of highscorepopup page -->
+        
+        <div data-role="popup" class="finishpopup" data-theme="a">
+        <div data-role="header" data-theme="a">
+       			<h3>Game Over</h3>
+        	</div>
+           
+        <div data-role="content" data-theme="a">
+ 			<div style="padding:20px 40px;">
+        <p>Your score is: <span class="currentScore"></span></p>
+        <div>
+            <a href="#index" class="btnDismiss" data-role="button" style="width:100%">Dismiss</a>
+            </div>
+            </div>
+            </div>
+                <div data-role="footer" data-theme="a"></div>
+        </div> <!-- end of finishpopup page -->
+      </div>
+    <footer data-role="footer" data-position="fixed" data-theme="a">
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#" data-role="button" class="back">Back</a></li>
+        </ul>
+    </div>
+    </footer>
+        </div><!-- end of #game page -->
+
+    <div data-role="page" id="leaderboard" data-theme="a">
+    <div data-role="header" data-theme="a">
+     <div class="header"></div>
+    </div>
+        <div data-role="content" data-theme="a">
+             <ul data-role="listview" data-inset="true" data-theme="b">
+                <li>
+                    <h3>Leaderboard</h3>
+                </li>
+            </ul>
+            <div id="leaderb">
+            
+            
+            </div>
+            <div class="ad_area"></div>
+        </div>
+        <div data-role="footer" data-theme="a" data-position="fixed">
+        <a href="#index" style="width: 300px" data-role="button">Back</a>
+        </div> 
+    </div><!-- end of page #leaderboard -->
+
+    <div data-role="page" id="instructions" data-theme="a">
+    <div data-role="header" data-theme="a">
+     <div class="header"></div>
+    </div>
+        <div data-role="content">
+             <ul data-role="listview" data-inset="true" data-theme="b">
+                <li>
+                    <h3>Instructions</h3>
+                </li>
+            </ul>
+        	<p>Your objective in Wuzzle is to form a complete English word by moving the letters on the board, the word needs to start from one end of the board to the other end. Words can be formed vertically, horizontally, and diagonally. </p>
+                <p>You start with 60 points which decreases with every second you spend playing the game, increases with every correct word. The leader of the game will be the person who loss the least amount of points.</p>
+        <div class="ad_area"></div>
+        </div>
+        <div data-role="footer" data-theme="a" data-position="fixed">
+        <div class="footer"></div>
+        </div> 
+    </div> <!-- end of page #instructions -->
+
+    <div data-role="page" id="about" data-theme="a">
+    <div data-role="header" data-theme="a">
+       <div class="header"></div>
+    </div>
+        <div data-role="content">
+             <ul data-role="listview" data-inset="true" data-theme="b">
+                <li>
+                    <h3>About</h3>
+                </li>
+            </ul>
+            <center>
+                <p>Name: <span class="game_name"></span></p>
+                <p>Version: 1.0</p>
+                <p>Developer: Khulekani Ngongoma</p>
+                <p>Support: khulekanik@live.com</p>
+            </center>
+            <div class="ad_area"></div>
+        </div>
+        <div data-role="footer" data-theme="a" data-position="fixed">
+            <div class="footer"></div>
+        </div> 
+    </div> <!-- end of page #about -->
+    
+    
+    <div data-role="page" id="improvement" data-theme="a">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <div class="header"></div>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" data-inset="true" data-theme="b">
+                <li>
+                    <h3>Improvement Statistics</h3>
+                </li>
+            </ul>
+        <canvas id="months_color" width="700" height="40" style="background: rgba(0,23,44,0.3); "></canvas>
+        <canvas id="visualize" width="700" height="350" style="background: rgba(0,23,44,0.3); "></canvas>
+        <div data-role="controlgroup" data-type="horizontal">
+            <input type="radio" name="chart_type" class="chart_type" id="linear_chart" checked="checked">
+                <label for="linear_chart">Linear Chart</label>
+            <input type="radio" name="chart_type" class="chart_type" id="bar_chart">
+                <label for="bar_chart">Bar Chart</label>
+            <input type="radio" name="chart_type" class="chart_type" id="radial_chart">
+                <label for="radial_chart">Radial Chart</label>
+           <!--
+           <input type="radio" name="chart_type" class="chart_type" id="pie_chart">
+                <label for="pie_chart">Pie Chart</label>
+           -->
+        </div>
+        <select id="months" data-native-menu="false">
+            <option>Select a month</option>
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+            <a href="#" id="visualize_month" data-role="button" data-inline="true" data-theme="b">Visualize Month</a>
+            <a href="#" id="append_month" data-role="button" data-inline="true" data-theme="b">Compare Month</a>
+        <div class="ad_area"></div>
+        </div>
+          <div data-role="footer" data-theme="a" data-position="fixed">
+              <div class="footer"></div>
+        </div>
+        
+    </div> <!-- end of #improvement page--> 
+    
+    
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery-ui-1.10.0.custom.js"></script>
+<script type="text/javascript" src="js/Settings.js"></script>
+<script type="text/javascript" src="js/settings_logic.js"></script>
+<script type="text/javascript" src="js/Leaderboard.js"></script>
+<script type="text/javascript" src="js/data_access/Wuzzle_DA.js"></script>
+<script type="text/javascript" src="js/data_access/Scores_DA.js"></script>
+<script type="text/javascript" src="js/data_access/Leaderboard_DA.js"></script>
+<script type="text/javascript" src="js/Scores.js"></script>
+<script type="text/javascript" src="js/Wuzzle.js"></script>
+<script type="text/javascript" src="js/GameController.js"> </script>
+<script src="js/jquery.mobile-1.2.0.js"></script>
+<script type="text/javascript" src="js/wuzzle_logic.js"></script>
+<script type="text/javascript" src="js/logic.js"></script>
+<script src="js/ad_server.js"></script>
+        <script>
+                $.get("footer.html",function(footer_content){
+                    $(".footer").html(footer_content);
+                    $.get("header.html",function(header_content){
+                        $(".header").html(header_content);
+                            AdServer.init();
+                            AdServer.iterateAds(15000);
+                    });
+        });
+        </script>
+</body>
+</html>

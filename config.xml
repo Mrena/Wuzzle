@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="1.0.0.0" id="Wuzzle">
+ 
+  <author href="http://www.mrena.co.za/"
+          rim:copyright="Copyright 2012-2013 Mrena Systems">Mrena Systems</author>
+ 
+  <name>Wuzzle</name>
+ 
+  <description>
+    Your objective in Wuzzle is to form a complete English word by moving the letters on the board, the word needs to start from one end of the board to the other end. Words can be formed vertically, horizontally, and diagonally. 
+  </description>
+ 
+  <icon src="images/icons/wuzzle-150.png"/>
+ 
+  <rim:splash src="images/icons/wuzzle-1280x768.png"/>
+  <rim:splash src="images/icons/wuzzle-768x1280.png"/>
+ 
+  <content src="index.html" rim:allowInvokeParams="true"/>
+ 
+  <feature id="blackberry.ui.dialog"/>
+   
+  <feature id="blackberry.app">
+    <param name="mode" value="portrait" />
+  </feature>
+ 
+  <feature id="blackberry.app">
+    <param name="backgroundColor" value="0xFFFF0000" />
+  </feature>
+ 
+  <access uri="*" subdomains="true"></access>
+ 
+  <license href="bin/licence.txt"/>
+ 
+</widget>

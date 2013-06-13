@@ -1,0 +1,6 @@
+Game Extras table structure
+Leaderboard
+leader_id, name, score
+
+Scores for Brain Improvement Statistics
+score_id, score, month, day
